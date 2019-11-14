@@ -1,0 +1,27 @@
+QWidget {
+    background-color: white;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    spacing: 0px;
+    font-size: 14pt;
+}
+
+QWidget#Statusbar {
+    background-color: black;
+    padding: 0px;
+}
+
+QLabel#StatusItem {
+    background-color: black;
+    border-left: 1px solid white;
+    color: white;
+    padding: 3px 7px;
+}
+
+QLineEdit {
+    background-color: black;
+    color: white;
+    padding: 3px 7px;
+}
