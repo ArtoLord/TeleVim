@@ -20,6 +20,7 @@ class AuthState(Enum):
 
 config_dir = os.environ.get('HOME', '.') + "/.config/pytelevim/"
 config_path = config_dir+"config.ini"
+work_dir = os.environ.get('HOME', '.')+"/.televim/"
 app_name = "pytelevim"
 
 
@@ -33,9 +34,10 @@ def write_default_config():
 
 def create_client():
     write_default_config()
+    os.makedirs(work_dir, exist_ok=True)
     app = Client(
         app_name,
-        workdir="/tmp",
+        workdir=work_dir,
         config_file=config_path,
     )
     return app
