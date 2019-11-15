@@ -1,11 +1,11 @@
-from typing import Union, Tuple
+from typing import Tuple
 
 from pyrogram import Client
 from enum import Enum
 import os
 from pyrogram.client.types.authorization import *
 from pyrogram.errors import *
-import asyncio
+from net_utils.default_config import default_config
 
 
 class AuthState(Enum):
@@ -18,22 +18,26 @@ class AuthState(Enum):
     WAIT_FOR_REGISTER = 7
 
 
-config_path = os.environ.get('HOME', '.') + "/.config/pytelevim/cofig.ini"
-
-api_id = 919672
-api_hash = "9b85feea20823c6a28ad50d5a22ce3b0"
+config_dir = os.environ.get('HOME', '.') + "/.config/pytelevim/"
+config_path = config_dir+"config.ini"
 app_name = "pytelevim"
 
 
+def write_default_config():
+    os.makedirs(config_dir, exist_ok=True)
+    exists = os.path.isfile(config_path)
+    if not exists:
+        with open(config_path, "w") as f:
+            f.write(default_config)
+
+
 def create_client():
+    write_default_config()
     app = Client(
         app_name,
-        api_id=api_id,
-        api_hash=api_hash,
         workdir="/tmp",
         config_file=config_path,
     )
-
     return app
 
 
@@ -100,6 +104,3 @@ async def send_password(client: Client, password: str):
     except BadRequest:
         return AuthState.WAIT_FOR_PASSWORD
     return AuthState.READY
-
-
-
