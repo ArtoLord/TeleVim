@@ -19,7 +19,7 @@ class AuthState(Enum):
 
 
 config_dir = os.environ.get('HOME', '.') + "/.config/pytelevim/"
-config_path = config_dir+"cofig.ini"
+config_path = config_dir+"config.ini"
 app_name = "pytelevim"
 
 
